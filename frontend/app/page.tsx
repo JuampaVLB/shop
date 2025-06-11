@@ -2,9 +2,10 @@
 
 import { Container } from "../components/ui/Container";
 import { useAuth } from "../providers/AuthProvider";
+import { Dashboard } from "./dashboard";
 import Auth from "./auth/page";
 
-const Dashboard = () => {
+const Home = () => {
 
   const { user, loading } = useAuth();
 
@@ -17,9 +18,8 @@ const Dashboard = () => {
   }
 
   return <Container>
-    <h1 className="text-red-600 text-3xl font-bold">Shopping Dashboard</h1>
-    <p className="text-gray-700 font-medium">Access your management system</p>
+    <Dashboard />
   </Container>
 }
 
-export default Dashboard;
+export default Home;
