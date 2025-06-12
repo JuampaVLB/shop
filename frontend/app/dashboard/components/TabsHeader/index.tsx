@@ -8,10 +8,11 @@ interface TabsHeaderProps {
     subtitle: string;
     showSearchBar: boolean;
     searchBarPlaceholder?: string;
+    onAddProduct?: () => void;
 }
 
 export const TabsHeader: FC<TabsHeaderProps> = ({
-    title, subtitle, showSearchBar, searchBarPlaceholder
+    title, subtitle, showSearchBar, searchBarPlaceholder, onAddProduct
 }) => {
     return (
         <div className={`flex flex-col md:flex-row mb-8 px-8 ${showSearchBar ? "justify-between" : "justify-center"}`}>
@@ -35,6 +36,7 @@ export const TabsHeader: FC<TabsHeaderProps> = ({
                             />
                         </div>
                         <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
+                            onClick={onAddProduct}
                         >
                             <Plus className="h-4 w-4" />
                             Add Product

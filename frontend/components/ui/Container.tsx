@@ -7,7 +7,7 @@ interface ContainerProps {
 export const Container: FC<ContainerProps> = ({
     children
 }) => {
-    return <div className="w-screen h-screen flex flex-col justify-center items-center bg-gray-50">
+    return <div className="w-screen h-screen flex flex-col justify-center items-center bg-gray-100">
         {children}
     </div>
 }
