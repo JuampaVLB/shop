@@ -9,6 +9,7 @@ export const Products = () => {
     return (
         <TabsContainer>
             <TabsHeader {...header} />
+            
         </TabsContainer>
     )
 }

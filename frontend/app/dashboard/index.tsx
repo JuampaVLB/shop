@@ -12,7 +12,7 @@ export const Dashboard = () => {
                 <p className="text-gray-700 font-medium">Comprehensive management system for your business operations
                 </p>
             </div>
-            <Tabs defaultValue="products" className="w-full max-w-7xl space-y-6 mt-15 items-center">
+            <Tabs defaultValue="products" className="space-y-6 mt-15 items-center">
                 <TabsList className="flex gap-4 justify-center">
                     <TabsTrigger value="products" className="flex items-center gap-2 px-4 py-2">
                         <Package className="h-4 w-4" /> Products
