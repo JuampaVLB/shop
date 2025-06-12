@@ -168,7 +168,7 @@ export const ModalProduct = ({ open, initialData, onOpenChange }: ModalProductPr
                     <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
                         disabled={!form?.name || !form.description || !form.price || !form.stock}
                     >
-                        Add Product
+                        Confirm
                     </Button>
                 </form>
             </DialogContent>
