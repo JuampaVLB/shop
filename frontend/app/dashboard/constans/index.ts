@@ -8,7 +8,7 @@ export const tabsHeaderData = [{
     title: "User Management",
     subtitle: "Manage user accounts and permissions",
     showSearchBar: true,
-    searchBarPlaceholder: "products"
+    searchBarPlaceholder: "users"
 },
 {
     title: "Business Analytics",
