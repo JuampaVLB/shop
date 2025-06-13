@@ -6,23 +6,14 @@ import { TabsHeader } from "../../TabsHeader"
 import { ModalProduct } from "../../Modals/ModalProduct";
 import { deleteProduct, getProducts } from "../../../../../api/productApi";
 import { toast } from "sonner";
+import { useProducts } from "../../../../../hooks/useProducts";
 
 export const Products = () => {
     const [openModal, setOpenModal] = useState(false);
-    const [products, setProducts] = useState<any[]>([]);
+    const { products, refetch } = useProducts();
     const [search, setSearch] = useState("");
     const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
     const header = tabsHeaderData[0];
-
-    const fetchProducts = async () => {
-        try {
-            const res = await getProducts();
-            setProducts(res.data);
-            console.log(res.data);
-        } catch (error) {
-            console.error("Error fetching products", error);
-        }
-    };
 
     const filteredProducts = products.filter(product =>
         product.name.toLowerCase().includes(search.toLowerCase())
@@ -30,20 +21,14 @@ export const Products = () => {
 
     const handleDelete = async (id: string) => {
         try {
-            console.log({ id });
-
             await deleteProduct(id);
             toast.success("Product deleted successfully");
-            fetchProducts();
+            refetch();
         } catch (error) {
             console.error("Failed to delete product", error);
             toast.error("Failed to delete product");
         }
     };
-
-    useEffect(() => {
-        fetchProducts();
-    }, []);
 
     return (
         <TabsContainer>
