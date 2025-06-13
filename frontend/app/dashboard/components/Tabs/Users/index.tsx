@@ -35,7 +35,7 @@ export const Users = () => {
     return (
         <TabsContainer>
             <TabsHeader {...header} onAddProduct={() => setOpenModal(true)} onSearch={setSearch} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 overflow-y-scroll max-h-[60vh]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-h-[60vh]">
                 {filteredUsers.map((data, idx) => (
                     <CardUser key={idx} data={data} onOpenModal={() => {
                         setSelectedUser(data);

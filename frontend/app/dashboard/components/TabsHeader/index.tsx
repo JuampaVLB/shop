@@ -24,9 +24,9 @@ export const TabsHeader: FC<TabsHeaderProps> = ({
             </div>
             {
                 showSearchBar && (
-                    <div className="flex gap-5 md:mt-0 mt-5">
+                    <div className="flex gap-5 md:mt-0 mt-5 flex-col md:flex-row">
                         <div className="relative">
-                            <Search className="absolute left-3 top-1/3 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                            <Search className="absolute left-3 top-1/3 transform -translate-y-0 md:-translate-y-1/2 text-slate-400 h-4 w-4" />
                             <Input
                                 id="signin-password"
                                 type="text"
