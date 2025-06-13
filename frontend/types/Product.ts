@@ -1,4 +1,5 @@
 export interface FormProduct {
+    id?: string;
     name: string;
     description: string;
     price: number;
