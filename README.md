@@ -2,8 +2,8 @@
 
 Este proyecto es un **monorepo** que contiene dos carpetas principales:
 
-- `/backend`: Servidor (Node.js, Express, etc.)
-- `/frontend`: Cliente (React, Next.js, etc.)
+- `/backend`: Servidor (Node.js, Express)
+- `/frontend`: Cliente (Next.js, Tailwind)
 
 ---
 
@@ -49,7 +49,7 @@ cd shop
 
 ### Video
 
-
+https://github.com/user-attachments/assets/cd53abec-dc48-446e-9d71-d3e7d8cf4453
 
 ### Capturas
 
@@ -64,6 +64,17 @@ cd shop
 <img width="156" alt="4" src="https://github.com/user-attachments/assets/1bfe424d-0401-4e95-b792-94c18c1cccf9" />
 
 <img width="154" alt="5" src="https://github.com/user-attachments/assets/34735c0c-4d0a-4047-9d9b-0ddf4f27a442" />
+
+### Mejoras
+
+Una lista de posibles mejoras ( no quiero tardar mas )
+
+1. Mover el Auth del sdk web de firebase a un endpoint en la api y no en el client
+2. No hacer re render al actulizar un product
+
+
+
+
 
 
 
