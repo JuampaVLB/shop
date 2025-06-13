@@ -6,14 +6,13 @@ import { TabsContainer } from "../../TabsContainer"
 import { TabsHeader } from "../../TabsHeader";
 import { CardInfo } from "./components/CardInfo";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-import { useProducts } from "../../../../../hooks/useProducts";
+import { useProducts } from "../../../../../hooks/useProduct";
 
 export const Analytics = () => {
     const { products } = useProducts();
     const totalProducts = products.length;
     const outOfStockProducts = products.filter(product => product.stock === 0).length;
     const header = tabsHeaderData[2];
-
     return (
         <TabsContainer>
             <div className="flex flex-col items-center">

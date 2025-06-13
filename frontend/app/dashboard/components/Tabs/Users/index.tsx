@@ -6,10 +6,12 @@ import { CardUser } from "../../CardUser";
 import { ModalUser } from "../../Modals/ModalUser";
 import { getUsers } from "../../../../../api/userApi";
 import { toast } from "sonner";
+import { User } from "../../../../../types/Auth";
+import { FormUser } from "../../../../../types/User";
 
 export const Users = () => {
     const [openModal, setOpenModal] = useState(false);
-    const [users, setUsers] = useState<any[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
     const [search, setSearch] = useState("");
     const [selectedUser, setSelectedUser] = useState<any | null>(null);
     const header = tabsHeaderData[1];

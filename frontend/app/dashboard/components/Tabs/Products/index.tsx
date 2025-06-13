@@ -4,9 +4,9 @@ import { CardProduct } from "../../CardProduct";
 import { TabsContainer } from "../../TabsContainer"
 import { TabsHeader } from "../../TabsHeader"
 import { ModalProduct } from "../../Modals/ModalProduct";
-import { deleteProduct, getProducts } from "../../../../../api/productApi";
+import { deleteProduct } from "../../../../../api/productApi";
 import { toast } from "sonner";
-import { useProducts } from "../../../../../hooks/useProducts";
+import { useProducts } from "../../../../../hooks/useProduct";
 
 export const Products = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -33,7 +33,7 @@ export const Products = () => {
     return (
         <TabsContainer>
             <TabsHeader {...header} onAddProduct={() => setOpenModal(true)} onSearch={setSearch} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 overflow-y-scroll max-h-[60vh]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-h-[60vh]">
                 {filteredProducts.map((data, idx) => (
                     <CardProduct key={idx} onOpenModal={() => {
                         setSelectedProduct(data);
