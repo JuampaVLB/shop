@@ -19,7 +19,7 @@ app.use(cors({
 
 // Routes
 app.use('/api/v1/product', productRoutes);
-app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/user', userRoutes);
 
 app.listen(PORT, () => {
     console.log("Server On Port: " + PORT);

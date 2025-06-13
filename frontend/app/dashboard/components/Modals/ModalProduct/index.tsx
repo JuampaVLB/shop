@@ -19,9 +19,11 @@ interface ModalProductProps {
 export const ModalProduct = ({ open, initialData, onOpenChange }: ModalProductProps) => {
 
     const [form, setForm] = useState<FormProduct | null>(null);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
 
         if (!form) return;
 
@@ -52,6 +54,8 @@ export const ModalProduct = ({ open, initialData, onOpenChange }: ModalProductPr
             window.location.reload();
         } catch (error) {
             toast.error(error.response.data[0].message);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -200,7 +204,7 @@ export const ModalProduct = ({ open, initialData, onOpenChange }: ModalProductPr
                     <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
                         disabled={!form?.name || !form.description || !form.price || !form.stock || !form.category}
                     >
-                        Confirm
+                        {loading ? "Loading..." : "Confirm"}
                     </Button>
                 </form>
             </DialogContent>

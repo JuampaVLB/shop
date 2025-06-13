@@ -7,6 +7,8 @@ import { Button } from "../../../../../components/ui/button";
 import { useEffect, useState } from "react";
 import { FormUser } from "../../../../../types/User";
 import { Roles } from "../../../../../types/Auth";
+import { toast } from "sonner";
+import { updateUser } from "../../../../../api/userApi";
 
 interface ModalUserProps {
     open: boolean;
@@ -18,20 +20,29 @@ export const ModalUser = ({ open, initialData, onOpenChange }: ModalUserProps) =
 
     const [form, setForm] = useState<FormUser | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!form) return;
 
-        console.log(form);
+        try {
+            if (initialData?.id) {
+                await updateUser(initialData?.id, form);
+                toast.success("Product successfully updated");
+            }
+
+            onOpenChange(false);
+            window.location.reload();
+        } catch (error) {
+            toast.error(error.response.data[0].message);
+        }
     }
 
     useEffect(() => {
         if (open) {
             setForm(initialData ?? {
                 fullname: "",
-                role: Roles.CLIENT,
-                email: "",
+                role: Roles.CLIENT
             });
         }
     }, [open, initialData]);
@@ -63,27 +74,6 @@ export const ModalUser = ({ open, initialData, onOpenChange }: ModalUserProps) =
                     </div>
 
                     <div className="space-y-2 w-full">
-                        <Label htmlFor="email" className="text-red-600">
-                            Email
-                        </Label>
-                        <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
-                            <Input
-                                id="description"
-                                type="email"
-                                placeholder="Enter email"
-                                value={form?.email}
-                                onChange={(e) => setForm(prev => prev ? { ...prev, email: e.target.value } : null)}
-                                className="pl-10"
-                                required
-                            />
-                        </div>
-
-
-
-                    </div>
-
-                    <div className="space-y-2 w-full">
                         <Label htmlFor="role" className="text-red-600">
                             Role
                         </Label>
@@ -107,7 +97,7 @@ export const ModalUser = ({ open, initialData, onOpenChange }: ModalUserProps) =
                     </div>
 
                     <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
-                        disabled={!form?.fullname || !form.email || !form.role}
+                        disabled={!form?.fullname || !form.role}
                     >
                         Confirm
                     </Button>

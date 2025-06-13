@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react"
+import { FC, ReactNode, useState } from "react"
 import { Card } from "../Card"
 import { FormProduct } from "../../../../types/Product";
 
@@ -9,11 +9,25 @@ interface CardProductProps {
 }
 
 export const CardProduct: FC<CardProductProps> = ({ onOpenModal, onDelete, data }) => {
+
+    const [loading, setLoading] = useState(true);
+
     return (
-        <Card onOpenModal={onOpenModal} onDelete={onDelete}>
+        <Card onOpenModal={onOpenModal} showDelete onDelete={onDelete}>
             <div className="flex gap-5">
-                <div className="w-35 h-35 bg-gray-800">
-                    <img src={data.image ?? ""} alt={data.name} className="w-full h-full object-cover" />
+                <div className="w-35 h-35 bg-gray-800 flex justify-center items-center">
+                    {loading && <p className="text-xl text-white">Loading...</p>}
+                    {data.image && (
+                        <img
+                            src={data.image}
+                            alt={data.name}
+                            className="w-full h-full object-cover"
+                            style={{ display: loading ? "none" : "block" }}
+                            onLoad={() => setLoading(false)}
+                            onError={() => setLoading(false)}
+                        />
+                    )}
+
                 </div>
                 <div>
                     <p className="font-bold text-xl">{data.name}</p>
