@@ -1,9 +1,10 @@
 import { useEffect, useState, useCallback } from "react";
 import { toast } from "sonner";
 import { getProducts } from "../api/productApi";
+import { FormProduct } from "../types/Product";
 
 export const useProducts = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<FormProduct[]>([]);
 
   const fetchProducts = useCallback(async () => {
     try {

@@ -13,7 +13,6 @@ export const Analytics = () => {
     const totalProducts = products.length;
     const outOfStockProducts = products.filter(product => product.stock === 0).length;
     const header = tabsHeaderData[2];
-    console.log("hola", process.env.NEXT_PUBLIC_TEST);
     return (
         <TabsContainer>
             <div className="flex flex-col items-center">
