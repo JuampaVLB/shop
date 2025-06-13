@@ -1,5 +1,5 @@
 import admin from "firebase-admin";
-import serviceAccount from "../config/shop-1eb4d-firebase-adminsdk-fbsvc-94ee124db3.json";
+import serviceAccount from "../config/shop-1eb4d-firebase-adminsdk-fbsvc-4a8265e171.json";
 
 if (!admin.apps.length) {
   admin.initializeApp({
