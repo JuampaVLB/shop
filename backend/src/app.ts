@@ -7,6 +7,7 @@ import { PORT } from "./helpers/constans";
 
 // Routes
 import productRoutes from './routes/product.routes';
+import userRoutes from './routes/user.routes';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(cors({
 
 // Routes
 app.use('/api/v1/product', productRoutes);
+app.use('/api/v1/users', userRoutes);
 
 app.listen(PORT, () => {
     console.log("Server On Port: " + PORT);
