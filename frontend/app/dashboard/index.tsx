@@ -6,8 +6,8 @@ import { Users } from "./components/Tabs/Users"
 
 export const Dashboard = () => {
     return (
-        <div className="w-full flex flex-col items-center">
-            <div className="flex flex-col gap-4 items-center">
+        <div className="w-full min-h-screen flex flex-col items-center px-4 py-8">
+            <div className="flex flex-col gap-4 items-center max-w-4xl w-full text-center">
                 <h1 className="text-red-600 text-4xl font-bold">Shopping Dashboard</h1>
                 <p className="text-gray-700 font-medium">Comprehensive management system for your business operations
                 </p>
