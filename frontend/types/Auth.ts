@@ -3,8 +3,13 @@ export enum Roles {
     ADMIN = "admin",
 }
 
+interface createdAt {
+    _seconds: number
+}
+
 export interface User {
     fullname: string;
+    createdAt?: createdAt;
     email: string;
     password: string;
     role: Roles;   
