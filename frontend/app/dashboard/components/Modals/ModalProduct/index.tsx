@@ -1,11 +1,14 @@
-import { Banknote, BookOpenText, ClockArrowDown, Image, Layers, ListFilter, ShoppingCart, SquarePen, User } from "lucide-react"
+import { Banknote, BookOpenText, Image, Layers, ListFilter, ShoppingCart, } from "lucide-react"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../../../../components/ui/dialog"
 import { Label } from "../../../../../components/ui/label";
 import { Input } from "../../../../../components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../../components/ui/select";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { Button } from "../../../../../components/ui/button";
 import { useEffect, useState } from "react";
 import { FormProduct } from "../../../../../types/Product";
+import { createProduct, updateProduct } from "../../../../../api/productApi";
+import { toast } from "sonner";
 
 interface ModalProductProps {
     open: boolean;
@@ -17,12 +20,39 @@ export const ModalProduct = ({ open, initialData, onOpenChange }: ModalProductPr
 
     const [form, setForm] = useState<FormProduct | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!form) return;
 
-        console.log(form);
+        let imageUrl = initialData?.image ?? null;
+
+        if (form.image instanceof File) {
+            const storage = getStorage();
+            const storageRef = ref(storage, `products/${form.image.name}`);
+            await uploadBytes(storageRef, form.image);
+            imageUrl = await getDownloadURL(storageRef);
+        }
+
+        const productData = {
+            ...form,
+            image: imageUrl,
+        };
+
+        try {
+            if (initialData?.id) {
+                await updateProduct(initialData?.id, form);
+                toast.success("Product successfully updated");
+            } else {
+                await createProduct(productData);
+                toast.success("Product successfully created");
+            }
+
+            onOpenChange(false);
+            window.location.reload();
+        } catch (error) {
+            toast.error(error.response.data[0].message);
+        }
     }
 
     useEffect(() => {
@@ -135,7 +165,6 @@ export const ModalProduct = ({ open, initialData, onOpenChange }: ModalProductPr
                                     type="file"
                                     onChange={(e) => setForm(prev => prev ? { ...prev, image: e.target.files?.[0] ?? null } : null)}
                                     className="pl-10"
-                                    required
                                 />
                             </div>
                         </div>
@@ -155,8 +184,11 @@ export const ModalProduct = ({ open, initialData, onOpenChange }: ModalProductPr
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="client">Client</SelectItem>
-                                        <SelectItem value="admin">Admin</SelectItem>
+                                        <SelectItem value="electronics">Electronics</SelectItem>
+                                        <SelectItem value="clothing">Clothing</SelectItem>
+                                        <SelectItem value="home">Home & Kitchen</SelectItem>
+                                        <SelectItem value="books">Books</SelectItem>
+                                        <SelectItem value="toys">Toys</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
@@ -166,7 +198,7 @@ export const ModalProduct = ({ open, initialData, onOpenChange }: ModalProductPr
                     </div>
 
                     <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
-                        disabled={!form?.name || !form.description || !form.price || !form.stock}
+                        disabled={!form?.name || !form.description || !form.price || !form.stock || !form.category}
                     >
                         Confirm
                     </Button>

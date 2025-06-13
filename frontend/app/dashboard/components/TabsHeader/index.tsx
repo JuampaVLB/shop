@@ -10,10 +10,11 @@ interface TabsHeaderProps {
     showButton: boolean;
     searchBarPlaceholder?: string;
     onAddProduct?: () => void;
+    onSearch?: (value: string) => void;
 }
 
 export const TabsHeader: FC<TabsHeaderProps> = ({
-    title, subtitle, showSearchBar, searchBarPlaceholder, showButton, onAddProduct
+    title, subtitle, showSearchBar, searchBarPlaceholder, showButton, onAddProduct, onSearch
 }) => {
     return (
         <div className={`flex flex-col md:flex-row mb-8 px-8 ${showSearchBar ? "justify-between" : "justify-center"}`}>
@@ -28,10 +29,10 @@ export const TabsHeader: FC<TabsHeaderProps> = ({
                             <Search className="absolute left-3 top-1/3 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                             <Input
                                 id="signin-password"
-                                type="password"
+                                type="text"
                                 placeholder={`Search ${searchBarPlaceholder}...`}
+                                onChange={(e) => onSearch?.(e.target.value)}
                                 // value={form.confirmPassword}
-                                // onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
                                 className="pl-10"
                                 required
                             />
