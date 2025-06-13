@@ -2,7 +2,7 @@ import { FC } from "react";
 
 interface CardInfoProps {
     title: string;
-    value: string;
+    value: string | number;
     subtitle?: string;
     colorScheme?: "blue" | "green" | "violet" | "orange";
 }
